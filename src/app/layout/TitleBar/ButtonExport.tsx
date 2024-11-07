@@ -32,15 +32,15 @@ const ButtonExport: FunctionComponent<ButtonExportProps> = (
   const [open, setOpen] = useState(false)
   const [list] = useState(configList)
   const [val, setVal] = useState(0)
-  const [fontName, setFontName] = useState(project.style.font.mainFamily)
+  const [fontName, setFontName] = useState(project.name)
   const [fileName, setFileName] = useState(project.name)
 
   const handleOpen = useCallback(() => {
-    setFontName(project.style.font.mainFamily)
+    setFontName(project.name)
     setFileName(project.name)
     setShowPreview(false)
     setOpen(true)
-  }, [project.name, project.style.font.mainFamily, setShowPreview])
+  }, [project.name, setShowPreview])
 
   const handleClose = () => {
     setOpen(false)
@@ -88,8 +88,8 @@ const ButtonExport: FunctionComponent<ButtonExportProps> = (
               <Input
                 fullWidth
                 type='text'
-                value={fontName}
-                placeholder={project.style.font.mainFamily}
+                value={fileName}
+                placeholder={project.name}
                 onChange={handleChangeFontName}
               />
             </GridInput>

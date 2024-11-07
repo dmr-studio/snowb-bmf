@@ -7,8 +7,16 @@ import { useProject } from 'src/store/hooks'
 
 const GlobalMetric: FunctionComponent<unknown> = () => {
   const { globalAdjustMetric } = useProject()
-  const { xAdvance, xOffset, yOffset, setXAdvance, setXOffset, setYOffset } =
-    globalAdjustMetric
+  const {
+    xAdvance,
+    xOffset,
+    yOffset,
+    numberWidth,
+    setXAdvance,
+    setXOffset,
+    setYOffset,
+    setNumberWidth,
+  } = globalAdjustMetric
 
   return (
     <>
@@ -19,9 +27,11 @@ const GlobalMetric: FunctionComponent<unknown> = () => {
         xAdvance={xAdvance}
         xOffset={xOffset}
         yOffset={yOffset}
+        numberWidth={numberWidth}
         setXAdvance={setXAdvance}
         setXOffset={setXOffset}
         setYOffset={setYOffset}
+        setNumberWidth={setNumberWidth}
       />
     </>
   )

@@ -1,6 +1,6 @@
-import React, { FunctionComponent } from 'react'
 import Box from '@mui/material/Box'
 import Input from '@mui/material/Input'
+import React, { FunctionComponent } from 'react'
 import GridInput from 'src/app/components/GridInput'
 
 interface SetHandle {
@@ -11,16 +11,26 @@ interface FormAdjustMetricProps {
   xAdvance: number
   xOffset: number
   yOffset: number
+  numberWidth: number
   setXAdvance: SetHandle
   setXOffset: SetHandle
   setYOffset: SetHandle
+  setNumberWidth: SetHandle
 }
 
 const FormAdjustMetric: FunctionComponent<FormAdjustMetricProps> = (
   props: FormAdjustMetricProps,
 ) => {
-  const { xAdvance, xOffset, yOffset, setXAdvance, setXOffset, setYOffset } =
-    props
+  const {
+    xAdvance,
+    xOffset,
+    yOffset,
+    numberWidth,
+    setXAdvance,
+    setXOffset,
+    setYOffset,
+    setNumberWidth,
+  } = props
 
   const getHandle =
     (handleSet: SetHandle) => (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -55,6 +65,16 @@ const FormAdjustMetric: FunctionComponent<FormAdjustMetricProps> = (
             fullWidth
             type='number'
             onChange={getHandle(setYOffset)}
+          />
+        </GridInput>
+      </Box>
+      <Box paddingX={2} marginY={4}>
+        <GridInput before='numberWidth:' after='px'>
+          <Input
+            value={numberWidth}
+            fullWidth
+            type='number'
+            onChange={getHandle(setNumberWidth)}
           />
         </GridInput>
       </Box>

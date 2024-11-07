@@ -1,7 +1,9 @@
+import { Global } from '@emotion/react'
 import { action, makeObservable, observable, runInAction } from 'mobx'
 import getTrimImageInfo from 'src/utils/getTrimImageInfo'
 
 import GlyphBase, { GlyphType } from './glyphBase'
+import Metric from './metric'
 
 export interface FileInfo {
   letter?: string
@@ -41,6 +43,7 @@ class GlyphImage extends GlyphBase {
     this.fileName = glyphImage.fileName || ''
     this.fileType = glyphImage.fileType || ''
     this.buffer = glyphImage.buffer || null
+
     if (glyphImage.buffer) {
       this.src = URL.createObjectURL(new Blob([glyphImage.buffer]))
       this.initImage()
@@ -53,16 +56,30 @@ class GlyphImage extends GlyphBase {
       image.onload = () => {
         runInAction(() => {
           const { naturalWidth, naturalHeight } = image
-          this.fontWidth = naturalWidth
-          this.fontHeight = naturalHeight
 
-          const trimInfo = getTrimImageInfo(image)
-          this.width = trimInfo.width
-          this.height = trimInfo.height
-          this.trimOffsetLeft = trimInfo.trimOffsetLeft
-          this.trimOffsetTop = trimInfo.trimOffsetTop
+          if ('0123456789'.includes(this.letter)) {
+            this.fontWidth = this.adjustMetric.numberWidth
+            this.fontHeight = naturalHeight
 
-          this.source = trimInfo.canvas
+            const trimInfo = getTrimImageInfo(image, 0, this.adjustMetric)
+            this.width = this.adjustMetric.numberWidth
+            this.height = trimInfo.height
+            this.trimOffsetLeft = trimInfo.trimOffsetLeft
+            this.trimOffsetTop = trimInfo.trimOffsetTop
+
+            this.source = trimInfo.canvas
+          } else {
+            this.fontWidth = naturalWidth
+            this.fontHeight = naturalHeight
+
+            const trimInfo = getTrimImageInfo(image)
+            this.width = trimInfo.width
+            this.height = trimInfo.height
+            this.trimOffsetLeft = trimInfo.trimOffsetLeft
+            this.trimOffsetTop = trimInfo.trimOffsetTop
+
+            this.source = trimInfo.canvas
+          }
           resolve()
         })
       }
@@ -76,6 +93,10 @@ class GlyphImage extends GlyphBase {
 
   changeSelect(isSelect: boolean): void {
     this.selected = isSelect
+  }
+
+  setAdjustmentMatrix(adjustmentMatrix: Metric): void {
+    this.adjustMetric.numberWidth = adjustmentMatrix.numberWidth
   }
 }
 

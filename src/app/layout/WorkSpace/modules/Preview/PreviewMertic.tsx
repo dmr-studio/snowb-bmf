@@ -11,8 +11,16 @@ const GlobalMetric: FunctionComponent<unknown> = () => {
   const glyph = glyphList.find((gl) => gl.letter === ui.selectLetter)
   if (!glyph) return null
   const { adjustMetric, letter } = glyph
-  const { xAdvance, xOffset, yOffset, setXAdvance, setXOffset, setYOffset } =
-    adjustMetric
+  const {
+    xAdvance,
+    xOffset,
+    yOffset,
+    numberWidth,
+    setXAdvance,
+    setXOffset,
+    setYOffset,
+    setNumberWidth,
+  } = adjustMetric
 
   return (
     <>
@@ -23,9 +31,11 @@ const GlobalMetric: FunctionComponent<unknown> = () => {
         xAdvance={xAdvance}
         xOffset={xOffset}
         yOffset={yOffset}
+        numberWidth={numberWidth}
         setXAdvance={setXAdvance}
         setXOffset={setXOffset}
         setYOffset={setYOffset}
+        setNumberWidth={setNumberWidth}
       />
     </>
   )

@@ -1,3 +1,4 @@
+import { Metric } from '../store'
 import trimImageData, { TrimImageInfo } from './trimImageData'
 
 interface TrimInfo extends TrimImageInfo {
@@ -7,6 +8,7 @@ interface TrimInfo extends TrimImageInfo {
 export default function getTrimImageInfo(
   image: HTMLImageElement,
   threshold = 0,
+  metric?: Metric,
 ): TrimInfo {
   const width = image.naturalWidth
   const height = image.naturalHeight
@@ -18,9 +20,17 @@ export default function getTrimImageInfo(
   ctx.drawImage(image, 0, 0)
   const imageData = ctx.getImageData(0, 0, width, height)
   const trimInfo = trimImageData(imageData, threshold)
-  canvas.width = trimInfo.width
-  canvas.height = trimInfo.height
-  ctx.drawImage(image, trimInfo.trimOffsetLeft, trimInfo.trimOffsetTop)
+
+  if (metric) {
+    canvas.width = metric.numberWidth
+    canvas.height = trimInfo.height
+    ctx.translate(Math.round((metric.numberWidth - image.naturalWidth) / 2), 0)
+    ctx.drawImage(image, trimInfo.trimOffsetLeft, trimInfo.trimOffsetTop)
+  } else {
+    canvas.width = trimInfo.width
+    canvas.height = trimInfo.height
+    ctx.drawImage(image, trimInfo.trimOffsetLeft, trimInfo.trimOffsetTop)
+  }
 
   return {
     canvas,

@@ -361,6 +361,7 @@ class Project {
       list.map((img) => {
         const glyphImage = new GlyphImage(img)
         this.glyphImages.push(glyphImage)
+        glyphImage.setAdjustmentMatrix(this.globalAdjustMetric)
         return glyphImage.initImage()
       }),
     ).then(this.pack)

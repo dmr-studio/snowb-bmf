@@ -106,7 +106,7 @@ class Font {
       setLineHeight: action.bound,
       setSharp: action.bound,
     })
-    this.size = font.size || 72
+    this.size = font.size || 32
     this.lineHeight = font.lineHeight || 1.25
     this.sharp = is.num(font.sharp) ? font.sharp : 80
     if (font.fonts && font.fonts.length) {
