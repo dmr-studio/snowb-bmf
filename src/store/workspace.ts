@@ -58,10 +58,10 @@ class Workspace {
       return 1
     }
     if (!p.name) {
-      p.name = 'Unnamed'
+      p.name = 'font'
       const namedList: number[] = []
       this.projectList.forEach((item) => {
-        const named = item.name.match(/^Unnamed-?(\d+)?$/)
+        const named = item.name.match(/^font-?(\d+)?$/)
         if (named) {
           namedList.push(Number(named[1]) || 0)
         }

@@ -23,7 +23,7 @@ interface TextRectangle {
 }
 
 class Project {
-  name = 'Unnamed'
+  name = 'font'
 
   id: number
 
@@ -79,7 +79,7 @@ class Project {
       setName: action.bound,
     })
     this.id = project.id || Date.now()
-    this.name = project.name || 'Unnamed'
+    this.name = project.name || 'font'
     this.text = project.text || this.text
     this.ui = new Ui(project.ui)
     this.style = new Style(project.style)
