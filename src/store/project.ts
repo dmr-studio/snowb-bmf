@@ -37,8 +37,7 @@ class Project {
 
   isPacking = false
 
-  text =
-    '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!№;%:?*()_+-=.,/|"\'@#$^&{}[]'
+  text = '^#x1234567890.,%MKB∞$฿¢' // @harry.dev custom, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!№;%:?*()_+-=.,/|"\'@#$^&{}[]'
 
   glyphs: Map<string, GlyphFont> = new Map()
 

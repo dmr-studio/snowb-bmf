@@ -1,9 +1,8 @@
+import * as Sentry from '@sentry/react'
 import React from 'react'
 import { createRoot } from 'react-dom/client'
-import * as Sentry from '@sentry/react'
 
 import App from './app/App'
-
 import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 
 if (process.env.NODE_ENV === 'production' && process.env.REACT_APP_SENTRY_DSN) {
@@ -37,3 +36,9 @@ serviceWorkerRegistration.register({
     worker.postMessage({ type: 'SKIP_WAITING' }, [channel.port2])
   },
 })
+
+// @harry.dev note letters
+console.warn(
+  'All Chars:\n0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!№;%:?*()_+-=.,/|"\'@#$^&{}[]',
+)
+console.warn('Common Chars:\n^#x1234567890.,%MKB∞$฿¢')
