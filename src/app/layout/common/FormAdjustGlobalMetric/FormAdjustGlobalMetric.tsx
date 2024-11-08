@@ -7,20 +7,34 @@ interface SetHandle {
   (value: number): void
 }
 
-interface FormAdjustMetricProps {
+interface FormAdjustGlobalMetricProps {
   xAdvance: number
   xOffset: number
   yOffset: number
+  numberWidth: number
+  numberHeight: number
   setXAdvance: SetHandle
   setXOffset: SetHandle
   setYOffset: SetHandle
+  setNumberWidth: SetHandle
+  setNumberHeight: SetHandle
 }
 
-const FormAdjustMetric: FunctionComponent<FormAdjustMetricProps> = (
-  props: FormAdjustMetricProps,
+const FormAdjustGlobalMetric: FunctionComponent<FormAdjustGlobalMetricProps> = (
+  props: FormAdjustGlobalMetricProps,
 ) => {
-  const { xAdvance, xOffset, yOffset, setXAdvance, setXOffset, setYOffset } =
-    props
+  const {
+    xAdvance,
+    xOffset,
+    yOffset,
+    numberWidth,
+    numberHeight,
+    setXAdvance,
+    setXOffset,
+    setYOffset,
+    setNumberWidth,
+    setNumberHeight,
+  } = props
 
   const getHandle =
     (handleSet: SetHandle) => (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -58,8 +72,28 @@ const FormAdjustMetric: FunctionComponent<FormAdjustMetricProps> = (
           />
         </GridInput>
       </Box>
+      <Box paddingX={2} marginY={4}>
+        <GridInput before='numberWidth:' after='px'>
+          <Input
+            value={numberWidth}
+            fullWidth
+            type='number'
+            onChange={getHandle(setNumberWidth)}
+          />
+        </GridInput>
+      </Box>
+      <Box paddingX={2} marginY={4}>
+        <GridInput before='numberHeight:' after='px'>
+          <Input
+            value={numberHeight}
+            fullWidth
+            type='number'
+            onChange={getHandle(setNumberHeight)}
+          />
+        </GridInput>
+      </Box>
     </>
   )
 }
 
-export default FormAdjustMetric
+export default FormAdjustGlobalMetric

@@ -1,7 +1,7 @@
-import { Global } from '@emotion/react'
 import { action, makeObservable, observable, runInAction } from 'mobx'
 import getTrimImageInfo from 'src/utils/getTrimImageInfo'
 
+import { DmrCustom } from '../dmr-custom'
 import GlyphBase, { GlyphType } from './glyphBase'
 import Metric from './metric'
 
@@ -50,7 +50,7 @@ class GlyphImage extends GlyphBase {
     }
   }
 
-  initImage(): Promise<void> {
+  initImage(newLoad: boolean = true): Promise<void> {
     return new Promise((resolve) => {
       const image = new Image()
       image.onload = () => {
@@ -58,6 +58,10 @@ class GlyphImage extends GlyphBase {
           const { naturalWidth, naturalHeight } = image
 
           if ('0123456789'.includes(this.letter)) {
+            if (newLoad) {
+              DmrCustom.inst.setNumberSize(naturalWidth, naturalHeight)
+            }
+
             this.fontWidth = this.adjustMetric.numberWidth
             this.fontHeight = naturalHeight
 

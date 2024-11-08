@@ -12,6 +12,7 @@ import Layout from './base/layout'
 import Metric from './base/metric'
 import Style from './base/style'
 import Ui from './base/ui'
+import { DmrCustom } from './dmr-custom'
 
 interface TextRectangle {
   width: number
@@ -52,8 +53,10 @@ class Project {
   packCanvas: HTMLCanvasElement | null = null
 
   ui: Ui = new Ui()
+  dmrCustom: DmrCustom | null = null
 
   constructor(project: Partial<Project> = {}) {
+    ;(globalThis as any).test = this
     makeObservable(this, {
       name: observable,
       isPacking: observable,
@@ -85,6 +88,7 @@ class Project {
     this.style = new Style(project.style)
     this.layout = new Layout(project.layout)
     this.globalAdjustMetric = new Metric(project.globalAdjustMetric)
+    this.dmrCustom = new DmrCustom(this.onAdjustmentMatrixChanged.bind(this))
 
     if (project.glyphs) {
       project.glyphs.forEach((value, key) => {
@@ -363,6 +367,21 @@ class Project {
         this.glyphImages.push(glyphImage)
         glyphImage.setAdjustmentMatrix(this.globalAdjustMetric)
         return glyphImage.initImage()
+      }),
+    ).then(this.pack)
+  }
+
+  onAdjustmentMatrixChanged(
+    maxNumberWidth: number,
+    maxNumberHeight: number,
+  ): void {
+    this.globalAdjustMetric.numberWidth = maxNumberWidth
+    this.globalAdjustMetric.numberHeight = maxNumberHeight
+
+    Promise.all(
+      this.glyphImages.map((glyphImage) => {
+        glyphImage.setAdjustmentMatrix(this.globalAdjustMetric)
+        return glyphImage.initImage(false)
       }),
     ).then(this.pack)
   }
