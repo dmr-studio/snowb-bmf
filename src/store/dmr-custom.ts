@@ -1,42 +1,35 @@
+import { Metric } from './base'
+
 export class DmrCustom {
   public static inst: DmrCustom
 
-  public maxNumberWidth: number = 0
-  public maxNumberHeight: number = 0
+  private _globalAdjustMetric: Metric
+  private _changeCallback: (maxNumberWidthChanged: boolean) => void
 
-  private _changeCallback: (
-    maxNumberWidth: number,
-    maxNumberHeight: number,
-  ) => void
   constructor(
-    changeCallback: (maxNumberWidth: number, maxNumberHeight: number) => void,
+    globalAdjustMetric: Metric,
+    changeCallback: (maxNumberWidthChanged: boolean) => void,
   ) {
     DmrCustom.inst = this
 
+    this._globalAdjustMetric = globalAdjustMetric
     this._changeCallback = changeCallback
   }
 
   public setNumberSize(width: number, height: number) {
-    let changed = false
-
-    if (this.maxNumberWidth < width) {
-      this.maxNumberWidth = width
-      changed = true
-    }
-    if (this.maxNumberHeight < height) {
-      this.maxNumberHeight = height
-      changed = true
+    if (this._globalAdjustMetric.numberWidth < width) {
+      this._globalAdjustMetric.setNumberWidth(width)
     }
 
-    if (changed) {
-      this.onGlobalMetricChanged(this.maxNumberWidth, this.maxNumberHeight)
+    if (this._globalAdjustMetric.numberHeight < height) {
+      this._globalAdjustMetric.setNumberHeight(height)
     }
 
     return true
   }
 
-  public onGlobalMetricChanged(width: number, height: number) {
+  public onGlobalMetricChanged(widthChanged: boolean) {
     typeof this._changeCallback === 'function' &&
-      this._changeCallback(width, height)
+      this._changeCallback(widthChanged)
   }
 }

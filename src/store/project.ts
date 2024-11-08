@@ -56,7 +56,6 @@ class Project {
   dmrCustom: DmrCustom | null = null
 
   constructor(project: Partial<Project> = {}) {
-    ;(globalThis as any).test = this
     makeObservable(this, {
       name: observable,
       isPacking: observable,
@@ -88,7 +87,10 @@ class Project {
     this.style = new Style(project.style)
     this.layout = new Layout(project.layout)
     this.globalAdjustMetric = new Metric(project.globalAdjustMetric)
-    this.dmrCustom = new DmrCustom(this.onAdjustmentMatrixChanged.bind(this))
+    this.dmrCustom = new DmrCustom(
+      this.globalAdjustMetric,
+      this.onAdjustmentMatrixChanged.bind(this),
+    )
 
     if (project.glyphs) {
       project.glyphs.forEach((value, key) => {
@@ -371,19 +373,15 @@ class Project {
     ).then(this.pack)
   }
 
-  onAdjustmentMatrixChanged(
-    maxNumberWidth: number,
-    maxNumberHeight: number,
-  ): void {
-    this.globalAdjustMetric.numberWidth = maxNumberWidth
-    this.globalAdjustMetric.numberHeight = maxNumberHeight
-
-    Promise.all(
-      this.glyphImages.map((glyphImage) => {
-        glyphImage.setAdjustmentMatrix(this.globalAdjustMetric)
-        return glyphImage.initImage(false)
-      }),
-    ).then(this.pack)
+  onAdjustmentMatrixChanged(maxNumberWidthChanged: boolean): void {
+    if (maxNumberWidthChanged) {
+      Promise.all(
+        this.glyphImages.map((glyphImage) => {
+          glyphImage.setAdjustmentMatrix(this.globalAdjustMetric)
+          return glyphImage.initImage(false)
+        }),
+      ).then(this.pack)
+    }
   }
 
   removeImage(image: GlyphImage): void {

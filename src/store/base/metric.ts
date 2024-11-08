@@ -48,14 +48,13 @@ class Metric {
     if (this.numberWidth === numberWidth) return
 
     this.numberWidth = numberWidth
-    DmrCustom.inst.onGlobalMetricChanged(this.numberWidth, this.numberHeight)
+    DmrCustom.inst.onGlobalMetricChanged(true)
   }
 
   setNumberHeight(numberHeight: number): void {
     if (this.numberHeight === numberHeight) return
 
     this.numberHeight = numberHeight
-    DmrCustom.inst.onGlobalMetricChanged(this.numberWidth, this.numberHeight)
   }
 }
 

@@ -8,12 +8,13 @@ import React, {
   useEffect,
   useState,
 } from 'react'
-import { useProject } from 'src/store/hooks'
+import { useProject, useProjectUi } from 'src/store/hooks'
 
 const Glyphs: FunctionComponent<unknown> = () => {
   const { text, setText } = useProject()
   const [isIME, setIsIME] = useState(false)
   const [inputText, setInputText] = useState(text)
+  const { previewText, setPreviewText } = useProjectUi()
 
   const handleInput = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
     const { value } = event.target
@@ -22,7 +23,10 @@ const Glyphs: FunctionComponent<unknown> = () => {
       setInputText(value)
     } else {
       setInputText(str)
-      if (str !== text) setText(str)
+      if (str !== text) {
+        setPreviewText(str)
+        setText(str)
+      }
     }
   }
 
@@ -35,7 +39,10 @@ const Glyphs: FunctionComponent<unknown> = () => {
     setIsIME(false)
     const str = Array.from(new Set(Array.from(inputText))).join('')
     setInputText(str)
-    if (str !== text) setText(str)
+    if (str !== text) {
+      setPreviewText(str)
+      setText(str)
+    }
   }
 
   useEffect(() => {
