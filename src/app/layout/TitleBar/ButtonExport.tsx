@@ -17,7 +17,7 @@ import React, {
 } from 'react'
 import GridInput from 'src/app/components/GridInput/GridInput'
 import { configList, exportFile } from 'src/file/export'
-import { useProject } from 'src/store/hooks'
+import { useProject, useWorkspace } from 'src/store/hooks'
 
 interface ButtonExportProps {
   className?: string
@@ -34,6 +34,9 @@ const ButtonExport: FunctionComponent<ButtonExportProps> = (
   const [val, setVal] = useState(0)
   const [fontName, setFontName] = useState(project.name)
   const [fileName, setFileName] = useState(project.name)
+
+  const worckSpace = useWorkspace()
+  const { currentProject: wsProject } = worckSpace
 
   const handleOpen = useCallback(() => {
     setFontName(project.name)
@@ -59,9 +62,9 @@ const ButtonExport: FunctionComponent<ButtonExportProps> = (
   }
 
   const handleSave = useCallback(() => {
-    exportFile(project, list[val], fontName, fileName)
+    exportFile(project, wsProject, list[val], fontName, fileName)
     handleClose()
-  }, [fileName, fontName, list, project, val])
+  }, [fileName, wsProject, fontName, list, project, val])
 
   useEffect(() => {
     hotkeys.unbind('ctrl+shift+s,command+shift+s')

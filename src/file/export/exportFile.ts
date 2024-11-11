@@ -1,13 +1,16 @@
 import { saveAs } from 'file-saver'
 import JSZip from 'jszip'
+import { toJS } from 'mobx'
 import { Project } from 'src/store'
 import drawPackCanvas from 'src/utils/drawPackCanvas'
 
+import { encode } from '../conversion'
 import toBmfInfo from './toBmfInfo'
 import { ConfigItem } from './type'
 
 export default function exportFile(
   project: Project,
+  wsProject: Project,
   config: ConfigItem,
   fontName: string,
   fileName: string,
@@ -23,6 +26,10 @@ export default function exportFile(
   }
 
   zip.file(`${saveFileName}.${config.ext}`, text)
+  try {
+    const buffer = encode(toJS(project))
+    zip.file(`${saveFileName}.sbf`, new Blob([buffer]))
+  } catch (e) {}
 
   const canvas = document.createElement('canvas')
   canvas.width = ui.width
