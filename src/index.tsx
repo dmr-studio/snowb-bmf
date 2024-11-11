@@ -38,7 +38,11 @@ serviceWorkerRegistration.register({
 })
 
 // @harry.dev note letters
-console.warn(
+const fontLetterTemplates = [
+  'Basic Num\n0123456789',
+  'Multiplier\nx0123456789.,',
+  'Combine 1:\nx1234567890.,MKB$฿¢',
+  'Combine 2:\n^#x1234567890.,%MKB∞$฿¢',
   'All Chars:\n0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!№;%:?*()_+-=.,/|"\'@#$^&{}[]',
-)
-console.warn('Common Chars:\n^#x1234567890.,%MKB∞$฿¢')
+]
+fontLetterTemplates.forEach((letters) => console.warn(letters))
