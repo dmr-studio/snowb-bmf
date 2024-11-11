@@ -6,7 +6,7 @@ const TEMP_INFO = `info face="$face$" size=$size$ bold=$bold$ italic=$italic$ ch
 const TEMP_COMMON = `common lineHeight=$lineHeight$ base=$base$ scaleW=$scaleW$ scaleH=$scaleH$ pages=$pages$ packed=$packed$\n`
 const TEMP_PAGE = `page id=$id$ file="$file$"\n`
 const TEMP_CHARS = `chars count=$count$\n`
-const TEMP_CHAR = `char id=$id$ x=$x$ y=$y$ width=$width$ height=$height$ xoffset=$xoffset$ yoffset=$yoffset$ xadvance=$xadvance$ page=$page$ chnl=$chnl$\n`
+const TEMP_CHAR = `char id=$id$ x=$x$ y=$y$ width=$width$ height=$height$ xoffset=$xoffset$ yoffset=$yoffset$ xadvance=$xadvance$ page=$page$ chnl=$chnl$ letter="$letter$"\n`
 const TEMP_KERNINGS = `kernings count=$count$\n`
 const TEMP_KERNING = `kerning first=$first$ second=$second$ amount=$amount$\n`
 
