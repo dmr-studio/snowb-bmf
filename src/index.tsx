@@ -39,8 +39,8 @@ serviceWorkerRegistration.register({
 
 // @harry.dev note letters
 const fontLetterTemplates = [
-  'Basic Num\n0123456789',
-  'Multiplier\nx0123456789.,',
+  'Basic Num:\n0123456789',
+  'Multiplier:\nx0123456789.,',
   'Combine 1:\nx1234567890.,MKB$฿¢',
   'Combine 2:\n^#x1234567890.,%MKB∞$฿¢',
   'All Chars:\n0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!№;%:?*()_+-=.,/|"\'@#$^&{}[]',
