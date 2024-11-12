@@ -4,11 +4,17 @@ export class DmrCustom {
   public static inst: DmrCustom
 
   private _globalAdjustMetric: Metric
-  private _changeCallback: (maxNumberWidthChanged: boolean) => void
+  private _changeCallback: (
+    maxNumberWidthChanged?: boolean,
+    autoSizeChanged?: boolean,
+  ) => void
 
   constructor(
     globalAdjustMetric: Metric,
-    changeCallback: (maxNumberWidthChanged: boolean) => void,
+    changeCallback: (
+      maxNumberWidthChanged?: boolean,
+      autoSizeChanged?: boolean,
+    ) => void,
   ) {
     DmrCustom.inst = this
 
@@ -28,8 +34,11 @@ export class DmrCustom {
     return true
   }
 
-  public onGlobalMetricChanged(widthChanged: boolean) {
+  public onGlobalMetricChanged(
+    widthChanged?: boolean,
+    autoSizeChanged?: boolean,
+  ) {
     typeof this._changeCallback === 'function' &&
-      this._changeCallback(widthChanged)
+      this._changeCallback(widthChanged, autoSizeChanged)
   }
 }

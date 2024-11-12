@@ -56,12 +56,12 @@ class GlyphImage extends GlyphBase {
       image.onload = () => {
         runInAction(() => {
           const { naturalWidth, naturalHeight } = image
+          const isNumber = '0123456789'.includes(this.letter)
+          if (isNumber && newLoad) {
+            DmrCustom.inst.setNumberSize(naturalWidth, naturalHeight)
+          }
 
-          if ('0123456789'.includes(this.letter)) {
-            if (newLoad) {
-              DmrCustom.inst.setNumberSize(naturalWidth, naturalHeight)
-            }
-
+          if (isNumber && this.adjustMetric.autoNumberSize) {
             this.fontWidth = this.adjustMetric.numberWidth
             this.fontHeight = naturalHeight
 
@@ -101,6 +101,7 @@ class GlyphImage extends GlyphBase {
 
   setAdjustmentMatrix(adjustmentMatrix: Metric): void {
     this.adjustMetric.numberWidth = adjustmentMatrix.numberWidth
+    this.adjustMetric.autoNumberSize = adjustmentMatrix.autoNumberSize
   }
 }
 

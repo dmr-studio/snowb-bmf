@@ -38,7 +38,7 @@ class Project {
 
   isPacking = false
 
-  text = '^#x1234567890.,%MKB∞$฿¢' // @harry.dev custom, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!№;%:?*()_+-=.,/|"\'@#$^&{}[]'
+  text = '1234567890.,xMKB^#∞$¢฿'
 
   glyphs: Map<string, GlyphFont> = new Map()
 
@@ -373,8 +373,11 @@ class Project {
     ).then(this.pack)
   }
 
-  onAdjustmentMatrixChanged(maxNumberWidthChanged: boolean): void {
-    if (maxNumberWidthChanged) {
+  onAdjustmentMatrixChanged(
+    maxNumberWidthChanged?: boolean,
+    autoSizeChanged?: boolean,
+  ): void {
+    if (maxNumberWidthChanged || autoSizeChanged) {
       Promise.all(
         this.glyphImages.map((glyphImage) => {
           glyphImage.setAdjustmentMatrix(this.globalAdjustMetric)

@@ -21,7 +21,7 @@ export default function getTrimImageInfo(
   const imageData = ctx.getImageData(0, 0, width, height)
   const trimInfo = trimImageData(imageData, threshold)
 
-  if (metric) {
+  if (metric && metric.autoNumberSize) {
     canvas.width = metric.numberWidth
     canvas.height = trimInfo.height
     ctx.translate(Math.round((metric.numberWidth - image.naturalWidth) / 2), 0)

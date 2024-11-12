@@ -30,7 +30,7 @@ const ButtonOpen: FunctionComponent<ButtonOpenProps> = (
     readFile(file, isText).then((buffer) => {
       try {
         const project = conversion(buffer)
-        if (!project.name) project.name = file.name
+        project.name = file.name.replace('.sbf', '').replace('.ltr', '')
         if (addProject(project)) {
           enqueueSnackbar(
             'The project already exists and has been switched to the current tab.',

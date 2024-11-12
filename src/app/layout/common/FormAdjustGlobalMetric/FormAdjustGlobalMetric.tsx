@@ -1,3 +1,4 @@
+import { Checkbox } from '@mui/material'
 import Box from '@mui/material/Box'
 import Input from '@mui/material/Input'
 import React, { FunctionComponent } from 'react'
@@ -7,15 +8,21 @@ interface SetHandle {
   (value: number): void
 }
 
+interface SetHandleBoolean {
+  (value: boolean): void
+}
+
 interface FormAdjustGlobalMetricProps {
   xAdvance: number
   xOffset: number
   yOffset: number
+  autoNumberSize: boolean
   numberWidth: number
   numberHeight: number
   setXAdvance: SetHandle
   setXOffset: SetHandle
   setYOffset: SetHandle
+  setAutoNumberSize: SetHandleBoolean
   setNumberWidth: SetHandle
   setNumberHeight: SetHandle
 }
@@ -27,11 +34,13 @@ const FormAdjustGlobalMetric: FunctionComponent<FormAdjustGlobalMetricProps> = (
     xAdvance,
     xOffset,
     yOffset,
+    autoNumberSize,
     numberWidth,
     numberHeight,
     setXAdvance,
     setXOffset,
     setYOffset,
+    setAutoNumberSize,
     setNumberWidth,
     setNumberHeight,
   } = props
@@ -73,6 +82,16 @@ const FormAdjustGlobalMetric: FunctionComponent<FormAdjustGlobalMetricProps> = (
         </GridInput>
       </Box>
       <Box paddingX={2} marginY={4}>
+        <GridInput before='Auto Number Size:'>
+          <Checkbox
+            checked={autoNumberSize}
+            size='small'
+            color='default'
+            onChange={(e) => setAutoNumberSize(e.target.checked)}
+          />
+        </GridInput>
+      </Box>
+      <Box paddingX={2} marginY={4}>
         <GridInput before='numberWidth:' after='px'>
           <Input
             value={numberWidth}
@@ -88,6 +107,7 @@ const FormAdjustGlobalMetric: FunctionComponent<FormAdjustGlobalMetricProps> = (
             value={numberHeight}
             fullWidth
             type='number'
+            disabled={true}
             onChange={getHandle(setNumberHeight)}
           />
         </GridInput>

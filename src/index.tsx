@@ -39,10 +39,10 @@ serviceWorkerRegistration.register({
 
 // @harry.dev note letters
 const fontLetterTemplates = [
-  'Basic Num:\n0123456789',
-  'Multiplier:\nx0123456789.,',
-  'Combine 1:\nx1234567890.,MKB$฿¢',
-  'Combine 2:\n^#x1234567890.,%MKB∞$฿¢',
+  'Frequency:\n1234567890.,xMKB^#∞$¢฿',
+  'AutoSpin:\n0123456789∞',
+  'CombineWin:\n1234567890.,xMKB$¢฿',
+  'WinPanel:\n1234567890.,xMKB^#$¢฿',
   'All Chars:\n0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!№;%:?*()_+-=.,/|"\'@#$^&{}[]',
 ]
 fontLetterTemplates.forEach((letters) => console.warn(letters))

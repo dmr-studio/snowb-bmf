@@ -12,11 +12,13 @@ const GlobalMetric: FunctionComponent<unknown> = () => {
     xAdvance,
     xOffset,
     yOffset,
+    autoNumberSize,
     numberWidth,
     numberHeight,
     setXAdvance,
     setXOffset,
     setYOffset,
+    setAutoNumberSize,
     setNumberWidth,
     setNumberHeight,
   } = globalAdjustMetric
@@ -31,10 +33,12 @@ const GlobalMetric: FunctionComponent<unknown> = () => {
         xOffset={xOffset}
         yOffset={yOffset}
         numberWidth={numberWidth}
+        autoNumberSize={autoNumberSize}
         numberHeight={numberHeight}
         setXAdvance={setXAdvance}
         setXOffset={setXOffset}
         setYOffset={setYOffset}
+        setAutoNumberSize={setAutoNumberSize}
         setNumberWidth={setNumberWidth}
         setNumberHeight={setNumberHeight}
       />

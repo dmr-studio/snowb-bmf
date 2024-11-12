@@ -54,6 +54,7 @@ const ButtonExport: FunctionComponent<ButtonExportProps> = (
   }
 
   const handleChangeFileName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFontName(e.target.value)
     setFileName(e.target.value)
   }
 
@@ -93,6 +94,7 @@ const ButtonExport: FunctionComponent<ButtonExportProps> = (
                 type='text'
                 value={fileName}
                 placeholder={project.name}
+                disabled={true}
                 onChange={handleChangeFontName}
               />
             </GridInput>
