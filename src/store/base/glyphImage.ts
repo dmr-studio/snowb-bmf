@@ -58,7 +58,11 @@ class GlyphImage extends GlyphBase {
           const { naturalWidth, naturalHeight } = image
           const isNumber = '0123456789'.includes(this.letter)
           if (isNumber && newLoad) {
-            DmrCustom.inst.setNumberSize(naturalWidth, naturalHeight)
+            DmrCustom.inst.setNumberSize(
+              this.letter,
+              naturalWidth,
+              naturalHeight,
+            )
           }
 
           if (isNumber && this.adjustMetric.autoNumberSize) {
@@ -93,6 +97,7 @@ class GlyphImage extends GlyphBase {
 
   setGlyph(text: string): void {
     this.letter = text[0] || ''
+    DmrCustom.inst.onGlyphChange()
   }
 
   changeSelect(isSelect: boolean): void {

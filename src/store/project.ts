@@ -90,6 +90,7 @@ class Project {
     this.dmrCustom = new DmrCustom(
       this.globalAdjustMetric,
       this.onAdjustmentMatrixChanged.bind(this),
+      this.onImageGlyphChanged.bind(this),
     )
 
     if (project.glyphs) {
@@ -387,9 +388,17 @@ class Project {
     }
   }
 
+  onImageGlyphChanged(): void {
+    this.glyphImages.map((glyphImage) => {
+      return glyphImage.initImage(true)
+    })
+  }
+
   removeImage(image: GlyphImage): void {
     const idx = this.glyphImages.indexOf(image)
     if (idx > -1) this.glyphImages.splice(idx, 1)
+
+    this.onImageGlyphChanged()
   }
 
   setCanvas(canvas: HTMLCanvasElement): void {
