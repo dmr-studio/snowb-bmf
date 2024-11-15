@@ -229,13 +229,24 @@ const PreviewCanvas: FunctionComponent<unknown> = () => {
           ctx.beginPath()
           ctx.moveTo(-data.xOffset, basey + 0.5 - data.yOffset + drawYOffset)
           ctx.lineTo(data.width, basey + 0.5 - data.yOffset + drawYOffset)
-          if (baseLine === minBaseLine || baseLine === maxBaseLine) {
-            ctx.strokeStyle = 'rgba(0,0,0,1)'
-            ctx.setLineDash([])
-          } else {
-            ctx.strokeStyle = 'rgba(0,0,0,0.5)'
-            ctx.setLineDash([10, 3, 2, 3])
+          switch (baseLine) {
+            case minBaseLine:
+            case maxBaseLine:
+              ctx.strokeStyle = 'rgba(0,0,0,1)'
+              ctx.setLineDash([])
+              break
+
+            case middle:
+              ctx.strokeStyle = 'rgba(255,0,0,1)'
+              ctx.setLineDash([0])
+              break
+
+            default:
+              ctx.strokeStyle = 'rgba(0,0,0,0.5)'
+              ctx.setLineDash([10, 3, 2, 3])
+              break
           }
+
           ctx.stroke()
         },
       )
