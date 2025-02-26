@@ -95,6 +95,27 @@ export const Metric = ($root.Metric = (() => {
       Object.hasOwnProperty.call(message, 'yOffset')
     )
       writer.uint32(/* id 3, wireType 0 =*/ 24).sint32(message.yOffset)
+
+    // autoNumberSize (boolean)
+    if (
+      message.autoNumberSize != null &&
+      Object.hasOwnProperty.call(message, 'autoNumberSize')
+    )
+      writer.uint32(/* id 4, wireType 0 =*/ 32).bool(message.autoNumberSize)
+
+    // numberWidth (number)
+    if (
+      message.numberWidth != null &&
+      Object.hasOwnProperty.call(message, 'numberWidth')
+    )
+      writer.uint32(/* id 5, wireType 0 =*/ 40).sint32(message.numberWidth)
+
+    // numberHeight (number)
+    if (
+      message.numberHeight != null &&
+      Object.hasOwnProperty.call(message, 'numberHeight')
+    )
+      writer.uint32(/* id 6, wireType 0 =*/ 48).sint32(message.numberHeight)
     return writer
   }
 
@@ -141,6 +162,18 @@ export const Metric = ($root.Metric = (() => {
           message.yOffset = reader.sint32()
           break
         }
+        case 4: {
+          message.autoNumberSize = reader.bool()
+          break
+        }
+        case 5: {
+          message.numberWidth = reader.sint32()
+          break
+        }
+        case 6: {
+          message.numberHeight = reader.sint32()
+          break
+        }
         default:
           reader.skipType(tag & 7)
           break
@@ -182,6 +215,24 @@ export const Metric = ($root.Metric = (() => {
       if (!$util.isInteger(message.xOffset)) return 'xOffset: integer expected'
     if (message.yOffset != null && message.hasOwnProperty('yOffset'))
       if (!$util.isInteger(message.yOffset)) return 'yOffset: integer expected'
+
+    // Check autoNumberSize (boolean)
+    if (
+      message.autoNumberSize != null &&
+      message.hasOwnProperty('autoNumberSize')
+    )
+      if (typeof message.autoNumberSize !== 'boolean')
+        return 'autoNumberSize: boolean expected'
+
+    // Check numberWidth (integer)
+    if (message.numberWidth != null && message.hasOwnProperty('numberWidth'))
+      if (!$util.isInteger(message.numberWidth))
+        return 'numberWidth: integer expected'
+
+    // Check numberHeight (integer)
+    if (message.numberHeight != null && message.hasOwnProperty('numberHeight'))
+      if (!$util.isInteger(message.numberHeight))
+        return 'numberHeight: integer expected'
     return null
   }
 

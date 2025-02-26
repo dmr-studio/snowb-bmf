@@ -27,7 +27,7 @@ class GlyphImage extends GlyphBase {
 
   selected = true
 
-  constructor(glyphImage: Partial<GlyphImage>) {
+  constructor(glyphImage: Partial<GlyphImage>, newLoad: boolean = true) {
     super(glyphImage)
     makeObservable(this, {
       src: observable,
@@ -46,7 +46,7 @@ class GlyphImage extends GlyphBase {
 
     if (glyphImage.buffer) {
       this.src = URL.createObjectURL(new Blob([glyphImage.buffer]))
-      this.initImage()
+      this.initImage(newLoad)
     }
   }
 

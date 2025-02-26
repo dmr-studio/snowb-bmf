@@ -99,8 +99,17 @@ class Project {
       })
     }
 
+    let autoNumberSize = project.globalAdjustMetric?.autoNumberSize ?? false
+    let numWidth = project.globalAdjustMetric?.numberWidth ?? 0
+    let numHeight = project.globalAdjustMetric?.numberHeight ?? 0
+    let newLoad = !(
+      autoNumberSize === true &&
+      numWidth !== 0 &&
+      numHeight !== 0
+    )
+
     project.glyphImages?.forEach((img) => {
-      this.glyphImages.push(new GlyphImage(img))
+      this.glyphImages.push(new GlyphImage(img, newLoad))
     })
 
     if (!this.glyphs.has(' '))
