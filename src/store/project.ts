@@ -115,7 +115,7 @@ class Project {
     if (!this.glyphs.has(' '))
       this.glyphs.set(' ', new GlyphFont({ letter: ' ' }))
 
-    this.addGlyphs(project.text || '')
+    this.addGlyphs((project.text ?? '') + ' ')
     this.addAutoRun()
     this.pack()
   }

@@ -12,7 +12,7 @@ class Ui {
 
   height = 0
 
-  previewText = '^#x1234567890.,%MKB∞$฿¢' // /\r\n|\r|\n/
+  previewText = '^#x1234567890.,%MKB∞$฿¢ ' // /\r\n|\r|\n/
 
   selectLetter = ''
 

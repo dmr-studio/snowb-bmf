@@ -24,7 +24,7 @@ const Glyphs: FunctionComponent<unknown> = () => {
     } else {
       setInputText(str)
       if (str !== text) {
-        setPreviewText(str)
+        setPreviewText(str + ' ')
         setText(str)
       }
     }
