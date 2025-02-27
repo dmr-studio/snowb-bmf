@@ -34,6 +34,7 @@ const PreviewCanvas: FunctionComponent<unknown> = () => {
         minBaseLine,
         maxBaseLine,
       },
+      bgPreviewColor,
     },
     layout: { padding },
     isPacking,
@@ -59,6 +60,11 @@ const PreviewCanvas: FunctionComponent<unknown> = () => {
     },
     [ui],
   )
+
+  const [backgroundColor, setBackgroundColor] = useState(
+    bgPixel.backgroundColor,
+  )
+
   const [data, setData] = useState<{
     lines: number
     list: {
@@ -169,6 +175,14 @@ const PreviewCanvas: FunctionComponent<unknown> = () => {
     globalAdjustMetric.xAdvance,
   ])
 
+  useEffect(() => {
+    if (bgPreviewColor.endsWith(',0)')) {
+      setBackgroundColor(bgPixel.backgroundColor)
+    } else {
+      setBackgroundColor(bgPreviewColor)
+    }
+  }, [bgPreviewColor, bgPixel.backgroundColor])
+
   useWheel(
     domRef,
     (info) => {
@@ -200,6 +214,12 @@ const PreviewCanvas: FunctionComponent<unknown> = () => {
 
     canvas.width = data.width
     canvas.height = data.height
+
+    if (bgPreviewColor) {
+      ctx.fillStyle = bgPreviewColor
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
+    }
+
     data.list.forEach((item) => {
       if (item.glyph instanceof GlyphImage && item.glyph.source) {
         ctx.drawImage(
@@ -232,12 +252,12 @@ const PreviewCanvas: FunctionComponent<unknown> = () => {
           switch (baseLine) {
             case minBaseLine:
             case maxBaseLine:
-              ctx.strokeStyle = 'rgba(0,0,0,1)'
+              ctx.strokeStyle = 'rgba(0,0,0,0.5)'
               ctx.setLineDash([])
               break
 
             case middle:
-              ctx.strokeStyle = 'rgba(255,0,0,1)'
+              ctx.strokeStyle = 'rgba(255,0,0,0.5)'
               ctx.setLineDash([0])
               break
 
@@ -256,6 +276,7 @@ const PreviewCanvas: FunctionComponent<unknown> = () => {
         -data.xOffset + 0.5,
         index * lh - data.yOffset + maxBaseLine - minBaseLine + drawYOffset,
       )
+      ctx.lineWidth = 0.5
       ctx.strokeStyle = 'rgba(0,0,0,1)'
       ctx.setLineDash([])
       ctx.stroke()
@@ -295,6 +316,7 @@ const PreviewCanvas: FunctionComponent<unknown> = () => {
       className={styles.root}
       style={{
         ...bgPixel,
+        backgroundColor: backgroundColor,
         cursor:
           dragState === 2 ? 'grabbing' : dragState === 1 ? 'grab' : 'default',
       }}

@@ -1,9 +1,9 @@
-import { action, observable, makeObservable } from 'mobx'
+import { action, makeObservable, observable } from 'mobx'
 
-import Font from './font'
 import Fill from './fill'
-import Stroke from './stroke'
+import Font from './font'
 import Shadow from './shadow'
+import Stroke from './stroke'
 
 class Style {
   readonly font: Font
@@ -19,6 +19,7 @@ class Style {
   readonly shadow: Shadow
 
   bgColor = 'rgba(0,0,0,0)'
+  bgPreviewColor = 'rgba(0,0,0,0)'
 
   constructor(style: Partial<Style> = {}) {
     makeObservable(this, {
@@ -29,9 +30,11 @@ class Style {
       useShadow: observable,
       shadow: observable,
       bgColor: observable,
+      bgPreviewColor: observable,
       setUseStroke: action.bound,
       setUseShadow: action.bound,
       setBgColor: action.bound,
+      setBgPreviewColor: action.bound,
     })
     this.font = new Font(style.font)
     this.fill = new Fill(style.fill)
@@ -51,6 +54,10 @@ class Style {
 
   setBgColor(bgColor: string): void {
     this.bgColor = bgColor
+  }
+
+  setBgPreviewColor(bgColor: string): void {
+    this.bgPreviewColor = bgColor
   }
 }
 

@@ -1,12 +1,13 @@
-import React, { FunctionComponent } from 'react'
 import Box from '@mui/material/Box'
 import Divider from '@mui/material/Divider'
 import Typography from '@mui/material/Typography'
+import React, { FunctionComponent } from 'react'
 
-import Fill from './modules/Fill'
-import Stroke from './modules/Stroke'
-import Shadow from './modules/Shadow'
 import BackgroundColor from './modules/BackgroundColor'
+import BackgroundPreviewColor from './modules/BackgroundPreviewColor'
+import Fill from './modules/Fill'
+import Shadow from './modules/Shadow'
+import Stroke from './modules/Stroke'
 
 const RightBar: FunctionComponent<unknown> = () => {
   return (
@@ -30,6 +31,7 @@ const RightBar: FunctionComponent<unknown> = () => {
         <Shadow />
         <Divider />
         <BackgroundColor />
+        <BackgroundPreviewColor />
       </Box>
     </Box>
   )
